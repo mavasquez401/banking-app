@@ -5,6 +5,7 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+// loading chart look for money in banks
 const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
   const data = {
     datasets: [

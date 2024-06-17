@@ -1,3 +1,4 @@
+// header box for welcome user and subtext
 const HeaderBox = ({
   type = "title",
   title,

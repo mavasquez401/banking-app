@@ -2,6 +2,7 @@ import React from "react";
 import AnimatedCounter from "./AnimatedCounter";
 import DoughnutChart from "./DoughnutChart";
 
+// displays balance across all accounts
 const TotalBalanceBox = ({
   accounts = [],
   totalBanks,

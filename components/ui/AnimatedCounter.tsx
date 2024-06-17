@@ -2,6 +2,7 @@
 
 import CountUp from "react-countup";
 
+// animated counter to count up the amount of money
 const AnimatedCounter = ({ amount }: { amount: number }) => {
   return (
     <div>
