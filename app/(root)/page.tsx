@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import HeaderBox from "@/components/ui/HeaderBox";
@@ -13,7 +13,7 @@ const Home = () => {
         <header className="home-header">
           <HeaderBox
             type="greeting"
-            title="welcome"
+            title="Welcome"
             user={loggedIn?.firstName || "Guest"}
             subtext="Access, manage your account and transactions efficiently."
           />

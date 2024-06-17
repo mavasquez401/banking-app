@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 import CountUp from "react-countup";
 
@@ -9,7 +9,7 @@ const AnimatedCounter = ({ amount }: { amount: number }) => {
       <CountUp
         className="w-full"
         decimals={2}
-        decimal=","
+        decimal="."
         prefix="$"
         end={amount}
       />
