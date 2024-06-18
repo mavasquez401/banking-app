@@ -1,6 +1,7 @@
 import MobileNav from "@/components/ui/MobileNav";
 import Sidebar from "@/components/ui/Sidebar";
 import Image from "next/image";
+import React from "react";
 
 export default function RootLayout({
   children,
