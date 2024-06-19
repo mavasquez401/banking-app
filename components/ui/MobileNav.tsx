@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+// nav bar for mobile view
 const MobileNav = ({ user }: MobileNavProps) => {
   const pathname = usePathname();
 

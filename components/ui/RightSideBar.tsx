@@ -1,5 +1,6 @@
 import React from "react";
 
+// Side bar in case mobile dev or smaller screen app is operable
 const RightSideBar = ({ user, transactions, banks }: RightSidebarProps) => {
   return (
     <aside className="right-sidebar">
