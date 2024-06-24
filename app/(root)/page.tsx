@@ -17,6 +17,7 @@ const Home = async () => {
           <HeaderBox
             type="greeting"
             title="Welcome"
+            /* Login status at welcome screen handled by appwrite */
             user={loggedIn?.name || "Guest"}
             subtext="Access, manage your account and transactions efficiently."
           />
