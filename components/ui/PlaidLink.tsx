@@ -8,7 +8,7 @@ import {
 import { get } from "http";
 import { StyledString } from "next/dist/build/swc";
 import { useRouter } from "next/navigation";
-import { createLinkToken } from "@/lib/actions/users.action";
+import { createLinkToken, exchangePublicToken } from "@/lib/actions/users.action";
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const router = useRouter();
@@ -23,7 +23,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   }, [user]);
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     async (public_token: string) => {
-      // await exchangePublicToken({publicToken:public_token, user})
+      await exchangePublicToken({publicToken:public_token, user})
       router.push("/");
     },
     [user]
