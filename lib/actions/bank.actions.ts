@@ -61,7 +61,7 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
 
     return parseStringify({ data: accounts, totalBanks, totalCurrentBalance });
   } catch (error) {
-    console.error("An error occurred while getting the accounts:", error);
+    console.error("An error occurred while getting the accounts 1:", error);
   }
 };
 
@@ -70,17 +70,26 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
   try {
     // get bank from db
     const bank = await getBank({ documentId: appwriteItemId });
+    console.log("Bank data:", bank);
 
     // get account info from plaid
     const accountsResponse = await plaidClient.accountsGet({
       access_token: bank.accessToken,
     });
+    console.log("Accounts response:", accountsResponse);
+
+    if (!accountsResponse.data.accounts || accountsResponse.data.accounts.length === 0) {
+      throw new Error("No accounts found in Plaid response");
+    }
+
     const accountData = accountsResponse.data.accounts[0];
+    console.log("Account data:", accountData);
 
     // get transfer transactions from appwrite
     const transferTransactionsData = await getTransactionsByBankId({
       bankId: bank.$id,
     });
+    console.log("Transfer transactions data:", transferTransactionsData);
 
     const transferTransactions = transferTransactionsData.documents.map(
       (transferData: Transaction) => ({
@@ -98,10 +107,12 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
     const institution = await getInstitution({
       institutionId: accountsResponse.data.item.institution_id!,
     });
+    console.log("Institution data:", institution);
 
     const transactions = await getTransactions({
       accessToken: bank?.accessToken,
     });
+    console.log("Transactions data:", transactions);
 
     const account = {
       id: accountData.account_id,
@@ -117,7 +128,7 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
     };
 
     // sort transactions by date such that the most recent transaction is first
-      const allTransactions = [...transactions, ...transferTransactions].sort(
+    const allTransactions = [...transactions, ...transferTransactions].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
 
@@ -129,6 +140,7 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
     console.error("An error occurred while getting the account:", error);
   }
 };
+
 
 // Get bank info
 export const getInstitution = async ({
@@ -144,7 +156,7 @@ export const getInstitution = async ({
 
     return parseStringify(intitution);
   } catch (error) {
-    console.error("An error occurred while getting the accounts:", error);
+    console.error("An error occurred while getting the accounts 3:", error);
   }
 };
 
@@ -182,7 +194,7 @@ export const getTransactions = async ({
 
     return parseStringify(transactions);
   } catch (error) {
-    console.error("An error occurred while getting the accounts:", error);
+    console.error("An error occurred while getting the accounts 4:", error);
   }
 };
 
