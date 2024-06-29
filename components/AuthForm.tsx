@@ -21,7 +21,7 @@ import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { getLoggedInUser, signIn, signUp } from "@/lib/actions/users.action";
+import { getLoggedInUser, signIn, signUp } from "@/lib/actions/user.actions";
 import PlaidLink from "./PlaidLink";
 
 const AuthForm = ({ type }: { type: string }) => {
@@ -45,7 +45,7 @@ const AuthForm = ({ type }: { type: string }) => {
     setIsLoading(true);
     try {
       // sign up with appwrite & create plaid token
-      if(type === 'sign-up') {
+      if (type === "sign-up") {
         const userData = {
           firstName: data.firstName!,
           lastName: data.lastName!,
@@ -56,8 +56,8 @@ const AuthForm = ({ type }: { type: string }) => {
           dateOfBirth: data.dateOfBirth!,
           ssn: data.ssn!,
           email: data.email,
-          password: data.password
-        }
+          password: data.password,
+        };
 
         const newUser = await signUp(userData);
 
@@ -105,7 +105,7 @@ const AuthForm = ({ type }: { type: string }) => {
       </header>
       {user ? (
         <div className="flex flex-col gap-4">
-          <PlaidLink user={user} variant='primary' />
+          <PlaidLink user={user} variant="primary" />
         </div>
       ) : (
         <>

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
 
 function Copy({ title }: { title: string }) {
   const [hasCopied, setHasCopied] = useState(false);

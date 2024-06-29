@@ -1,10 +1,10 @@
 import React from "react";
-import HeaderBox from "@/components/ui/HeaderBox";
-import TotalBalanceBox from "@/components/ui/TotalBalanceBox";
-import RightSideBar from "@/components/ui/RightSideBar";
-import { getLoggedInUser } from "@/lib/actions/users.action";
+import HeaderBox from "@/components/HeaderBox";
+import TotalBalanceBox from "@/components/TotalBalanceBox";
+import RightSideBar from "@/components/RightSideBar";
+import { getLoggedInUser } from "@/lib/actions/user.actions";
 import { getAccount, getAccounts } from "@/lib/actions/bank.actions";
-import RecentTransactions from "@/components/ui/RecentTransactions";
+import RecentTransactions from "@/components/RecentTransactions";
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string) || 1;
