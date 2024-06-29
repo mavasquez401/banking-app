@@ -192,7 +192,7 @@ export const getTransactionStatus = (date: Date) => {
   const twoDaysAgo = new Date(today);
   twoDaysAgo.setDate(today.getDate() - 2);
 
-  return date > twoDaysAgo ? "Processing" : "Success"
+  return date > twoDaysAgo ? "Processing" : "Success";
 };
 
 export const authFormSchema = (type: string) => z.object({
@@ -208,4 +208,4 @@ export const authFormSchema = (type: string) => z.object({
   // both
   email: z.string().email(),
   password: z.string().min(8),
-});
+})
