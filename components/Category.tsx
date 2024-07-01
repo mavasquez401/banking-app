@@ -1,30 +1,37 @@
-"use client";
+import Image from "next/image";
 
-import * as React from "react";
-import * as ProgressPrimitive from "@radix-ui/react-progress";
-
+import { topCategoryStyles } from "@/constants";
 import { cn } from "@/lib/utils";
 
-const Progress = React.forwardRef<
-  React.ElementRef<typeof ProgressPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
->(({ indicatorClassName, className, value, ...props }, ref) => (
-  <ProgressPrimitive.Root
-    ref={ref}
-    className={cn(
-      "relative h-4 w-full overflow-hidden rounded-full bg-secondary",
-      className
-    )}
-    {...props}>
-    <ProgressPrimitive.Indicator
-      className={cn(
-        "h-full w-full flex-1 bg-primary transition-all",
-        indicatorClassName
-      )}
-      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-    />
-  </ProgressPrimitive.Root>
-));
-Progress.displayName = ProgressPrimitive.Root.displayName;
+import { Progress } from "./ui/progress";
 
-export { Progress };
+const Category = ({ category }: CategoryProps) => {
+  const {
+    bg,
+    circleBg,
+    text: { main, count },
+    progress: { bg: progressBg, indicator },
+    icon,
+  } = topCategoryStyles[category.name as keyof typeof topCategoryStyles] ||
+  topCategoryStyles.default;
+
+  return (
+    <div className={cn("gap-[18px] flex p-4 rounded-xl", bg)}>
+      <figure className={cn("flex-center size-10 rounded-full", circleBg)}>
+        <Image src={icon} width={20} height={20} alt={category.name} />
+      </figure>
+      <div className="flex w-full flex-1 flex-col gap-2">
+        <div className="text-14 flex justify-between">
+          <h2 className={cn("font-medium", main)}>{category.name}</h2>
+          <h3 className={cn("font-normal", count)}>{category.count}</h3>
+        </div>
+        <Progress
+          value={(category.count / category.totalCount) * 100}
+          className={cn("h-2 w-full", progressBg)}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Category;
